@@ -27,6 +27,7 @@ document.getElementById("fruitImg").src = getFruitUrl(nr);
 selFruitNr = nr; //sparar bilden i globala variabler
 } //end showFruit
 
+// byt nr till bild på frukt
 function getFruitUrl(nr) {
     let url;
     switch (nr) {
@@ -66,4 +67,4 @@ function addFruits() {
         imgList += " <img src='" + fruitUrl + "' alt='frukt'>";
     }
     selFruitsElem.innerHTML += imgList;
-}
+} //end addfruits
