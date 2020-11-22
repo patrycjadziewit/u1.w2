@@ -13,7 +13,7 @@ var startTime; // tid då spelet startades
 // Funktion som körs då hela webbsidan är inladdad, dvs då all HTML-kod är utförd
 // Initiering av globala variabler samt koppling av funktioner till knapparna.
 function init() {
-    startGameBtn = document.getElementById("startgameBtn");
+    startGameBtn = document.getElementById("startGameBtn");
     startGameBtn.onclick = startGame;
     letterbuttons = document.getElementById("letterButtons").getElementsByTagName("button");
     for (let i = 0; i < letterButtons.length; i++)
