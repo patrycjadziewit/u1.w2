@@ -1,7 +1,7 @@
-var input1Elem, input2Elem;
-var msgElem; 
-var selFruitsElem;
-var selFruitNr;
+var input1Elem, input2Elem; 
+var msgElem; //referens till meddelnadet
+var selFruitsElem; //referens på frukten som ska visas
+var selFruitNr; //nr på valda frukten
 // Globala variabler
 
 function init() { 
@@ -20,11 +20,12 @@ window.onload = init;
 
 //funktion som visar bild på frukt när man skriver tal 1-5
 function showFruit() {
-    let nr = checkNr(input1Elem.value,5);
+    let nr = checkNr(input1Elem.value,5); // hämta nr från input 1 och högsta gränsen är 5
+    if (nr == null) return;
     input1Elem.value = nr;
-    
 document.getElementById("fruitImg").src = getFruitUrl(nr);
-}
+selFruitNr = nr; //sparar bilden i globala variabler
+} //end showFruit
 
 function getFruitUrl(nr) {
     let url;
@@ -50,7 +51,9 @@ function checkNr(nr, high){
     }
     nr = parseInt(nr); //avrundar till heltal
    return nr;
-}
+} //end checknr
+
+//visa ett antal frukter
 function addFruits() {
     if (selFruitNr == 0) {
         msgElem.innerHTML = "du måste först välja en frukt"; return;
