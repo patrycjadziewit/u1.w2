@@ -48,7 +48,7 @@ function checkNr(nr, high){
         msgElem.innerHTML = "du måste skriva ett tal med siffror"; return null;
     }
     if (nr < 1 || nr > high) {
-        msgElem.innerHTML = "du måste skriva ett tal med siffror" + high; return null;
+        msgElem.innerHTML = "du måste skriva ett tal mellan 1 och 5" ; return null;
     }
     nr = parseInt(nr); //avrundar till heltal
    return nr;

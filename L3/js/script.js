@@ -15,13 +15,14 @@ var startTime; // tid då spelet startades
 function init() {
     startGameBtn = document.getElementById("startGameBtn");
     startGameBtn.onclick = startGame;
-    letterbuttons = document.getElementById("letterButtons").getElementsByTagName("button");
+    letterButtons = document.getElementById("letterButtons").getElementsByTagName("button");
     for (let i = 0; i < letterButtons.length; i++)
-    letterbuttons[i].onclick = guessLetter;
-    hangmanImg = document.getElementById("hangman");msgElem = document.getElementById("message");
+    letterButtons[i].onclick = guessLetter;
+    hangmanImg = document.getElementById("hangman");
+    msgElem = document.getElementById("message");
     startGameBtn.disabled = false;
-    for (let i=0; i < letterbuttons.length; i++)
-    letterbuttons(i).disabled =true;
+    for (let i = 0; i < letterButtons.length; i++)
+    letterButtons[i].disabled =true;
 }
     
  // End init
@@ -31,11 +32,11 @@ window.onload = init; // Se till att init aktiveras då sidan är inladdad
 function startGame() {
     randomWord();
     showLetterBoxes();
-    hangmanImg.src = "img/h0.png";
-    hangmanImgnr = 0;
+    hangmanImg.src ="img/h0.png";
+    hangmanImgNr = 0;
     startGameBtn.disabled = true;
-    for (let i = 0; i < letterbuttons.length; i++)
-    letterbuttons[i].disabled = false;
+    for (let i = 0; i < letterButtons.length; i++)
+    letterButtons[i].disabled =false;
     msgElem.innerHTML = "";
     let now = new Date(); // tiden just nu
     startTime = now.getTime(); //tiden just nu i milisek.
@@ -43,17 +44,17 @@ function startGame() {
 
 //randomword (slumpmässig ord)
 function randomWord() {
-    let oldWord = selectedword;
-    while (oldWord == selectedword) {
-        let wordIndex = Math.floor(wordList.length+Math.random()); //slumpord
-        selectedword = wordList[wordIndex]; //nytt ord sparas i glob. variablen
+    let oldWord = selectedWord;
+    while (oldWord == selectedWord) {
+        let wordIndex = Math.floor(wordList.length*Math.random()); //slumpord
+        selectedWord = wordList[wordIndex]; //nytt ord sparas i glob. variablen
     }
 } //end randomword
 
 // showletterboxes (visa 1 box/bokstav i ordet)
 function showLetterBoxes() {
     let newCode = ""; //ny htmlkod för rutan
-    for (let i = 0; i < selectedword.length; i++){
+    for (let i = 0; i < selectedWord.length; i++){
         newCode += "<span>&nbsp;</span>"; //nonbreakable space/ tom ruta visas
     }
     document.getElementById("letterBoxes").innerHTML = newCode;
@@ -64,25 +65,25 @@ function showLetterBoxes() {
 // guessletter (gissa bokstaven)
 function guessLetter() {
     this.disabled = true; //inaktivera knappen
-    let letterBoxes= this.value; //hämta bokstaven man klickat på
+    let letter = this.value; //hämta bokstaven man klickat på
     let letterFound = false; //visa om bokstaven finns i ordet
-    let correctLetterCount = 0; //antal rätta bokstäver
-    for (let i = 0; i < selectword.length; i++) { //kolla om bokstaven finns flera ggr
-        if ( letter == selectword.charAt(i)) {
-            letterboxes[i].innerHTML = letter; //visa bokstaven i rutan
+    let correctLettersCount = 0; //antal rätta bokstäver
+    for (let i = 0; i < selectedWord.length; i++) { //kolla om bokstaven finns flera ggr
+        if (letter == selectedWord.charAt(i)) {
+            letterBoxes[i].innerHTML = letter; //visa bokstaven i rutan
             letterFound = true; //bokstaven finns
         } 
-        if (letterboxes(i).innerHTML != "&nbsp;")
-    correctLetterCount++; //räknaren går upp med 1
+        if (letterBoxes[i].innerHTML != "&nbsp;")
+    correctLettersCount++; //räknaren går upp med 1
     }
     if (letterFound === false) {//bokstaven hittades inte
-        hangmanImgnr++;
-        hangmanImg.src = "img/h" + hangmanImgnr + ".png";
-        if (hangmanImgnr == 6) {
+        hangmanImgNr++;
+        hangmanImg.src = "img/h" + hangmanImgNr + ".png";
+        if (hangmanImgNr == 6) {
             endgame(true); //gubben blev hängd
         }
     }
-    else if (correctLetterCount == selectword.length) {
+    else if (correctLettersCount == selectedWord.length) {
         endgame(false); //gubben inte hängd
     }
 } //end guessletter
@@ -91,14 +92,14 @@ function guessLetter() {
 function endgame(manHanged) {
     let runTime = (new Date().getTime() - startTime) / 1000;//speltid
     if (manHanged) {
-        msgElem.innerHTML = "Tyvärr, gubben hängdes. Rätta ordet är" + selectword;
+        msgElem.innerHTML = "Tyvärr, gubben hängdes. Rätta ordet är " + selectedWord;
     } //förlorad spel
     else {
         msgElem.innerHTML = "Grattis. Du gissade rätt!";
     } //vunnen spel
-    msgElem.innerHTML += "<br>Det tog " + runTime.toFixed(1) + "sekunder.";
+    msgElem.innerHTML += "<br>Det tog " + runTime.toFixed(1) + " sekunder.";
     startGameBtn.disabled = false;
-    for (let i=0; i < letterbuttons.length; i++) //start knappen fungerar
-    letterbuttons(i).disabled = true; //bokstavsknapparna fingerar ej
+    for (let i=0; i < letterButtons.length; i++) //start knappen fungerar
+    letterButtons[i].disabled = true; //bokstavsknapparna fingerar ej
 } //end endgame
     
