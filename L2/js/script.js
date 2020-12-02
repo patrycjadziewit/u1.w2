@@ -8,10 +8,10 @@ function init() {
     input1Elem = document.getElementById("input1");
     input2Elem = document.getElementById("input2");
     msgElem = document.getElementById("message");
-    selFruitsElem = document.getElementById("selectedFruits")
+    selFruitsElem = document.getElementById("selectedFruits");
     document.getElementById("btn1").onclick = showFruit;
     document.getElementById("btn2").onclick = addFruits;
-    selFruitNr = nr;
+    selFruitNr = 0;
 
 } // End init
 window.onload = init; 
@@ -20,7 +20,7 @@ window.onload = init;
 
 //funktion som visar bild på frukt när man skriver tal 1-5
 function showFruit() {
-    let nr = checkNr(input1Elem.value,5); // hämta nr från input 1 och högsta gränsen är 5
+     let nr = checkNr(input1Elem.value,5); // hämta nr från input 1 och högsta gränsen är 5
     if (nr == null) return;
     input1Elem.value = nr;
 document.getElementById("fruitImg").src = getFruitUrl(nr);
@@ -51,13 +51,13 @@ function checkNr(nr, high) {
         msgElem.innerHTML = "du måste skriva ett tal mellan 1 och " + high; return null;
     }
     nr = parseInt(nr); //avrundar till heltal
-   return nr;
+   return nr ;
 } //end checknr
 
 //visa ett antal frukter
 function addFruits() {
     if (selFruitNr == 0) {
-        msgElem.innerHTML = "du måste först välja en frukt"; return;
+        msgElem.innerHTML = "du måste först välja en frukt."; return;
     }
     let amount = checkNr(input2Elem.value,9);
     if (amount == null) return;
