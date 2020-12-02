@@ -42,13 +42,13 @@ return url;
 } // end getFruitUrl
 
 // kontrollerar om det angivna värdet är ett tal och om den ligger i gränserna
-function checkNr(nr, high){
+function checkNr(nr, high) {
     msgElem.innerHTML = "";
     if (isNaN(nr)) {
         msgElem.innerHTML = "du måste skriva ett tal med siffror"; return null;
     }
     if (nr < 1 || nr > high) {
-        msgElem.innerHTML = "du måste skriva ett tal mellan 1 och " + high ; return null;
+        msgElem.innerHTML = "du måste skriva ett tal mellan 1 och " + high; return null;
     }
     nr = parseInt(nr); //avrundar till heltal
    return nr;
